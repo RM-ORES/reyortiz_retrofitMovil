@@ -1,4 +1,6 @@
 package com.example.retrofitMovil.data.repositories
 
-class MesaRepository {
+import javax.inject.Inject
+
+class MesaRepository @Inject constructor() {
 }

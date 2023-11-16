@@ -1,5 +1,6 @@
 package com.example.retrofitMovil.ui.pantallaDetalle
 
+import com.example.retrofitMovil.domain.modelo.Pedido
 import com.example.retrofitMovil.ui.pantallaMaster.MasterEvent
 
 sealed class DetalleEvent {
@@ -7,7 +8,7 @@ sealed class DetalleEvent {
     class GetPedidosPorMesa(val id : Int) : DetalleEvent()
     class DeleteMesa(val id: Int) : DetalleEvent()
 
-    class Actualizar(val id: Int) : DetalleEvent()
+    class AddPedido(val pedido: Pedido) : DetalleEvent()
     object ErrorVisto : DetalleEvent()
 
 }

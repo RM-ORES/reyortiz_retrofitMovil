@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.retrofitMovil.domain.modelo.Mesa
@@ -32,7 +33,7 @@ class MesasAdapter (
     }
     class DiffCallback : DiffUtil.ItemCallback<Mesa>() {
         override fun areItemsTheSame(oldItem: Mesa, newItem: Mesa): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem.tableNumber == newItem.tableNumber
         }
 
         override fun areContentsTheSame(oldItem: Mesa, newItem: Mesa): Boolean {
@@ -40,5 +41,13 @@ class MesasAdapter (
         }
     }
 
-
+    val swipeGesture = object : SwipeGesture(context){
+        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+            when(direction){
+                ItemTouchHelper.LEFT -> {
+                    //if selected mode
+                }
+            }
+        }
+    }
 }

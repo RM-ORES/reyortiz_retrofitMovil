@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">reyortiz_retrofitMovil</string>
+    <string name="delete">Delete</string>
 </resources>

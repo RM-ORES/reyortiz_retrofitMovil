@@ -3,13 +3,12 @@ package com.example.retrofitMovil.ui.pantallaMaster
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.retrofitMovil.data.repositories.MesaRepository
-import com.example.retrofitMovil.data.repositories.PedidosRepository
+import com.example.retrofitMovil.domain.usecases.mesa.GetAllMesaUsecase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class MasterViewModel @Inject constructor(private val mesaRepository: MesaRepository) : ViewModel(){
+class MasterViewModel @Inject constructor(private val getAllMesaUsecase: GetAllMesaUsecase) : ViewModel(){
     private val _uiState = MutableLiveData<MasterState>()
     val uiState: LiveData<MasterState> get() = _uiState
     init{

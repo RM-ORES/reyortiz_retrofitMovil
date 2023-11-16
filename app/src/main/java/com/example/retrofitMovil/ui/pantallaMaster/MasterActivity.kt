@@ -3,7 +3,9 @@ package com.example.retrofitMovil.ui.pantallaMaster
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.retrofitMovil.domain.modelo.Pedido
+import com.example.reyortiz_retrofitmovil.R
 import com.example.reyortiz_retrofitmovil.databinding.ActivityMasterBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,6 +34,25 @@ class MasterActivity : AppCompatActivity() {
                     TODO("Not yet implemented")
                 }
             })
+        //binding.rvMesas.adapter = mesasAdapter
+
+        val touchHelper = ItemTouchHelper(mesasAdapter.swipeGesture)
+        //touchHelper.attachToRecyclerView(binding.rvMesas)
+    }
+    private fun observarViewModel(){
+        viewModel.uiState.observe(this){state ->
+
+        }
+    }
+    private fun configAppBar(){
+        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
+            when(menuItem.itemId){
+               R.id.delete -> {
+                   //handle event delete
+                   true}
+                else -> {false}
+            }
+        }
     }
 
 }
