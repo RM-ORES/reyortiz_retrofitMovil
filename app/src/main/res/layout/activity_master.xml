@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context="com.example.retrofitMovil.ui.pantallaMaster.MasterActivity">
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-
         android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -17,7 +16,6 @@
             android:layout_height="wrap_content"
             app:liftOnScroll="true"
             >
-
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/topAppBar"
                 style="@style/Widget.MaterialComponents.Toolbar.Primary"
@@ -25,11 +23,19 @@
                 android:layout_height="?attr/actionBarSize"
                 app:menu="@menu/menu_app_bar"
                 app:navigationIcon="@drawable/ic_launcher_foreground"
-                app:title="TITULO" />
+                app:title="@string/app_name" />
 
         </com.google.android.material.appbar.AppBarLayout>
-
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvPedidos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="1"
+        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

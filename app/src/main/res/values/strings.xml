@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">reyortiz_retrofitMovil</string>
     <string name="delete">Delete</string>
+    <string name="asientos">Asientos:</string>
+    <string name="mesa">Mesa:</string>
+    <string name="fecha">Fecha</string>
+    <string name="customer_id">Customer ID</string>
+    <string name="text">text</string>
+    <string name="pedidos">Pedidos:</string>
+    <string name="a_adir">Añadir</string>
+
 </resources>
