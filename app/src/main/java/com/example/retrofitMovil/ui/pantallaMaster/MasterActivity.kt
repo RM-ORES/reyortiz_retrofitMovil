@@ -34,10 +34,10 @@ class MasterActivity : AppCompatActivity() {
                     TODO("Not yet implemented")
                 }
             })
-        //binding.rvMesas.adapter = mesasAdapter
+        binding.rvMesas.adapter = mesasAdapter
 
         val touchHelper = ItemTouchHelper(mesasAdapter.swipeGesture)
-        //touchHelper.attachToRecyclerView(binding.rvMesas)
+        touchHelper.attachToRecyclerView(binding.rvMesas)
     }
     private fun observarViewModel(){
         viewModel.uiState.observe(this){state ->

@@ -3,9 +3,12 @@ package com.example.retrofitMovil.ui.pantallaMaster
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.retrofitMovil.domain.usecases.mesa.GetAllMesaUsecase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 
 @HiltViewModel
 class MasterViewModel @Inject constructor(private val getAllMesaUsecase: GetAllMesaUsecase) : ViewModel(){
@@ -24,5 +27,12 @@ class MasterViewModel @Inject constructor(private val getAllMesaUsecase: GetAllM
             is MasterEvent.VerDetalle -> TODO()
         }
     }
-    private fun getMesas(){}
+    private fun getMesas(){
+        viewModelScope.launch {
+            var list = getMesas()
+            when (list){
+                is
+            }
+        }
+    }
 }

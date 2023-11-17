@@ -1,6 +1,8 @@
-package com.example.retrofitMovil.data.sources
+package com.example.retrofitMovil.data.sources.di
 
-import com.example.retrofitMovil.common.Constantes.BASE_URL
+import com.example.retrofitMovil.utilities.Constantes.BASE_URL
+import com.example.retrofitMovil.data.sources.services.MesaService
+import com.example.retrofitMovil.data.sources.services.PedidoService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -54,8 +56,12 @@ object NetworkModule {
             .build()
     }
 
-//    @Singleton
-//    @Provides
-//    fun provideCurrencyService(retrofit: Retrofit): DogService =
-//        retrofit.create(DogService::class.java)
+    @Singleton
+    @Provides
+    fun provideCurrencyTableService(retrofit: Retrofit): MesaService =
+        retrofit.create(MesaService::class.java)
+    @Singleton
+    @Provides
+    fun provideCurrencyOrderService(retrofit: Retrofit): PedidoService =
+        retrofit.create(PedidoService::class.java)
 }
