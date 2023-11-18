@@ -3,6 +3,7 @@ package com.example.retrofitMovil.data.sources.di
 import com.example.retrofitMovil.utilities.Constantes.BASE_URL
 import com.example.retrofitMovil.data.sources.services.MesaService
 import com.example.retrofitMovil.data.sources.services.PedidoService
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,31 +18,24 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-    @Singleton
-    @Provides
-    fun provideServiceInterceptor(): ServiceInterceptor  = ServiceInterceptor()
+
 
 
     @Singleton
     @Provides
-    fun provideHttpClient(serviceInterceptor: ServiceInterceptor): OkHttpClient {
+    fun provideHttpClient(): OkHttpClient {
         return OkHttpClient
             .Builder()
             .readTimeout(15, TimeUnit.SECONDS)
             .connectTimeout(15, TimeUnit.SECONDS)
-            .addInterceptor(serviceInterceptor)
             .build()
     }
 
     @Singleton
     @Provides
     fun provideConverterFactory(): GsonConverterFactory =
-        GsonConverterFactory.create()
+        GsonConverterFactory.create(GsonBuilder().setLenient().create())
 
-    @Singleton
-    @Provides
-    fun provideConverterMoshiFactory(): MoshiConverterFactory =
-        MoshiConverterFactory.create()
 
     @Singleton
     @Provides

@@ -15,5 +15,5 @@ interface MesaService {
     suspend fun getMesa(@Path(Constantes.ID) id :Int):Response<MesaResponse>
 
     @DELETE(Constantes.MESA_ID)
-    suspend fun deleteMesa(@Path(Constantes.ID) id: Int): Response<>
+    suspend fun deleteMesa(@Path(Constantes.ID) id: Int): Response<MesaResponse>
 }

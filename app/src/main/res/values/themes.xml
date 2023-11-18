@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Theme.Reyortiz_retrofitMovil" parent="android:Theme.Material.Light.NoActionBar">
-            <item name="colorPrimary">@color/colorPrimary</item>
-            <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-            <item name="colorAccent">@color/colorAccent</item>
-            <item name="android:textColor">@color/colorPrimary</item>
-            <item name="android:itemBackground">@color/skyBlue</item>
+    <style name="Theme.Reyortiz_retrofitMovil" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColor">@color/purple_200</item>
+        <item name="android:itemBackground">@color/skyBlue</item>
     </style>
 </resources>

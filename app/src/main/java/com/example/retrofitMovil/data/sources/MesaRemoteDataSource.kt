@@ -11,14 +11,13 @@ class MesaRemoteDataSource @Inject constructor(private val mesaService: MesaServ
         try {
             val response = mesaService.getAllMesas()
             if (response.isSuccessful) {
-                val body = response.body()
-                body?.let {
+                response.body()?.let {
                     val mesas = it.map { mesaResponse ->
                         mesaResponse.toMesa()
                     }
                     return NetworkResult.Success(mesas)
                 }
-                return error()
+                return error("No data")
             }
             return error("${response.code()} ${response.message()}")
         } catch (e: Exception) {

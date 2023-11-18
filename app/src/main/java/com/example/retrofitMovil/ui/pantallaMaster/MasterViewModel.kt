@@ -6,8 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.retrofitMovil.domain.modelo.Mesa
 import com.example.retrofitMovil.domain.usecases.mesa.GetAllMesaUsecase
+import com.example.retrofitMovil.utilities.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -17,7 +19,7 @@ class MasterViewModel @Inject constructor(private val getAllMesaUsecase: GetAllM
     val uiState: LiveData<MasterState> get() = _uiState
     val selectedMesas = mutableListOf<Mesa>()
     init{
-        _uiState.value = MasterState(mesas = emptyList(), error = null)
+        getMesas()
     }
     fun handleEvent(event: MasterEvent){
         when(event){
@@ -35,9 +37,15 @@ class MasterViewModel @Inject constructor(private val getAllMesaUsecase: GetAllM
     }
     private fun getMesas(){
         viewModelScope.launch {
-            var list = getMesas()
+            val list = getAllMesaUsecase()
             when (list){
-                is
+                is NetworkResult.Success ->{
+                    _uiState.value = MasterState(mesas = list.data as List<Mesa>)
+                    Timber.i((list.data as List<Mesa>).toString())
+                }
+                is NetworkResult.Error ->{
+                    _uiState.value = MasterState(mesas = emptyList(), error= list.message.toString())
+                }
             }
         }
     }

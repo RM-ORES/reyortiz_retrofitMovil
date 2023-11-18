@@ -14,9 +14,8 @@ interface PedidoService {
     suspend fun getPedidos(id: Int): Response<List<PedidoResponse>>
 
     @POST(Constantes.ALLPEDIDOS)
-    suspend fun addPedido(pedido: Pedido): Response<>
+    suspend fun addPedido(pedido: Pedido): Response<PedidoResponse>
 
     @DELETE(Constantes.PEDIDO_ID)
-    suspend fun deletePedido(@Path(Constantes.ID) id: Int): Response<>
-}
+    suspend fun deletePedido(@Path(Constantes.ID) id: Int): Response<PedidoResponse>
 }

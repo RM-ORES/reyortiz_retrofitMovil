@@ -1,4 +1,7 @@
 package com.example.retrofitMovil.domain.usecases.pedido
 
-class AddPedidoUsecase {
+import com.example.retrofitMovil.data.repositories.PedidosRepository
+import javax.inject.Inject
+
+class AddPedidoUsecase @Inject constructor(pedidosRepository: PedidosRepository) {
 }

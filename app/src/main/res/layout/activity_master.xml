@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.retrofitMovil.ui.pantallaMaster.MasterActivity">
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
@@ -22,8 +23,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:menu="@menu/menu_app_bar"
-                app:navigationIcon="@drawable/ic_launcher_foreground"
-                app:title="@string/app_name" />
+                app:navigationIcon="@drawable/baseline_table_restaurant_24"
+                app:title="@string/mesas" />
 
         </com.google.android.material.appbar.AppBarLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
@@ -32,10 +33,13 @@
         android:id="@+id/rvMesas"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
+        android:layout_marginHorizontal="@dimen/marginSmall"
+        android:layout_marginTop="@dimen/marginLarge"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="1"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:spanCount="1" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

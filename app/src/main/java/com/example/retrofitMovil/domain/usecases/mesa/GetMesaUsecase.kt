@@ -1,4 +1,12 @@
 package com.example.retrofitMovil.domain.usecases.mesa
 
-class GetMesaUsecase {
+import com.example.retrofitMovil.data.repositories.MesaRepository
+import com.example.retrofitMovil.domain.modelo.Mesa
+import com.example.retrofitMovil.utilities.NetworkResult
+import javax.inject.Inject
+
+class GetMesaUsecase @Inject constructor(private val mesaRepository: MesaRepository){
+//    suspend operator fun invoke(): NetworkResult<List<Mesa>> {
+//        return mesaRepository.getMesa()
+//    }
 }

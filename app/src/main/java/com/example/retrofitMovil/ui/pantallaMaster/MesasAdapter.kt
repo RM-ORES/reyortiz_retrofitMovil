@@ -1,6 +1,5 @@
 package com.example.retrofitMovil.ui.pantallaMaster
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -11,9 +10,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.retrofitMovil.domain.modelo.Mesa
-import com.example.retrofitMovil.domain.modelo.Pedido
 import com.example.retrofitMovil.ui.SwipeGesture
-import com.example.retrofitMovil.utilities.Constantes
 import com.example.reyortiz_retrofitmovil.R
 import com.example.reyortiz_retrofitmovil.databinding.ItemBinding
 
@@ -38,6 +35,7 @@ class MesasAdapter (
     }
     fun resetSelectMode(){
         selectMode = false
+        selectedMesas.clear()
         notifyDataSetChanged()
     }
 
@@ -48,9 +46,13 @@ class MesasAdapter (
                 .inflate(R.layout.item, parent, false)
         )
     }
-    override fun onBindViewHolder(holder: MesaViewHolder, position: Int) = with(holder) {
-        bind(getItem(position))
+    override fun onBindViewHolder(holder: MesaViewHolder, position: Int) {
+        val mesa = getItem(position)
+        mesa?.let{
+            holder.bind(it)
+        }
     }
+
 
 
     inner class MesaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
@@ -63,13 +65,18 @@ class MesasAdapter (
             itemView.setOnClickListener{
                 if (!selectMode){
                     actions.itemClicked(mesa)
+                } else {
+                    if(selectedMesas.contains(mesa)){
+                        selectedMesas.remove(mesa)
+                        actions.removeSelected(mesa)
+                    }
                 }
             }
             itemView.setOnLongClickListener {
                 if (!selectMode){
                     selectMode = true
-                    actions.onStartSelectMode(mesa)
                     selectedMesas.add(mesa)
+                    actions.onStartSelectMode(mesa)
                 } else {
                     if(selectedMesas.contains(mesa)){
                         selectedMesas.remove(mesa)
@@ -83,9 +90,7 @@ class MesasAdapter (
                 true
             }
             if(selectedMesas.contains(mesa)){
-                itemView.setBackgroundColor(Color.parseColor(R.color.colorPrimaryDark.toString()))
-            } else {
-                itemView.setBackgroundColor(Color.parseColor(R.color.colorPrimary.toString()))
+                itemView.setBackgroundColor(Color.MAGENTA)
             }
         }
     }

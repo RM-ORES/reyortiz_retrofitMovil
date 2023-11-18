@@ -2,14 +2,14 @@ package com.example.retrofitMovil.ui.pantallaMaster
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.ActionMode
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.view.ActionMode
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.retrofitMovil.domain.modelo.Mesa
-import com.example.retrofitMovil.domain.modelo.Pedido
 import com.example.retrofitMovil.ui.pantallaDetalle.DetalleActivity
 import com.example.retrofitMovil.utilities.Constantes
 import com.example.reyortiz_retrofitmovil.R
@@ -24,6 +24,9 @@ class MasterActivity : AppCompatActivity() {
     private lateinit var mesasAdapter: MesasAdapter
     private var anteriorState: MasterState? = null
     private var actionMode: ActionMode? = null
+    private val callback by lazy {
+        configContextBar()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +43,9 @@ class MasterActivity : AppCompatActivity() {
                 }
 
                 override fun onStartSelectMode(mesa: Mesa) {
-                    configContextBar()
+                    startSupportActionMode(callback)?.let {
+                        actionMode = it
+                    }
                     viewModel.handleEvent(MasterEvent.StartSelectMode)
                     viewModel.handleEvent(MasterEvent.SeleccionarMesa(mesa))
                 }
@@ -64,7 +69,14 @@ class MasterActivity : AppCompatActivity() {
 
     private fun observarViewModel() {
         viewModel.uiState.observe(this) { state ->
-            if (state.selectMode){
+            state.error?.let { error ->
+                Toast.makeText(this@MasterActivity, error, Toast.LENGTH_SHORT).show()
+                viewModel.handleEvent(MasterEvent.ErrorVisto)
+            }
+            if(state.mesas != anteriorState?.mesas && state.mesas.isNotEmpty()){
+                mesasAdapter.submitList(state.mesas)
+            }
+            if (state.selectedMesas != anteriorState?.selectedMesas){
                 actionMode?.title = "${state.selectedMesas.size}" + Constantes.SELECTED
             }
             if (state.selectMode != anteriorState?.selectMode) {
@@ -94,8 +106,7 @@ class MasterActivity : AppCompatActivity() {
 //        }
 //    }
 
-    private fun configContextBar() =
-        object : ActionMode.Callback {
+    private fun configContextBar()= object : ActionMode.Callback {
             override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
                 menuInflater.inflate(R.menu.menu_context_bar, menu)
                 return true
