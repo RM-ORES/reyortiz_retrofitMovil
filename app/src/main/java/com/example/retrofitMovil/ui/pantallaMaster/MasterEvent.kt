@@ -6,8 +6,13 @@ import com.example.retrofitMovil.ui.pantallaDetalle.DetalleEvent
 sealed class MasterEvent {
     object GetMesas : MasterEvent()
     object ErrorVisto : MasterEvent()
+
+    object StartSelectMode: MasterEvent()
+    object ResetSelectMode: MasterEvent()
+
+
     class DeleteMesa(val id: Int) : MasterEvent()
-    class DeleteSeleccionadas() : MasterEvent()
+    object DeleteSeleccionadas : MasterEvent()
     class SeleccionarMesa(val mesa: Mesa) : MasterEvent()
-    class VerDetalle(val id : Int) : MasterEvent()
+    class RemoveSeleccionada(val mesa: Mesa) : MasterEvent()
 }

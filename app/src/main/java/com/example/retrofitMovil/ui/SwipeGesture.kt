@@ -1,4 +1,4 @@
-package com.example.retrofitMovil.ui.pantallaMaster
+package com.example.retrofitMovil.ui
 
 import android.content.Context
 import android.graphics.Canvas
