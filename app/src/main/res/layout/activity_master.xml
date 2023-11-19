@@ -22,7 +22,7 @@
                 style="@style/Widget.MaterialComponents.Toolbar.Primary"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:menu="@menu/menu_app_bar"
+                app:menu="@menu/menu_context_bar"
                 app:navigationIcon="@drawable/baseline_table_restaurant_24"
                 app:title="@string/mesas" />
 

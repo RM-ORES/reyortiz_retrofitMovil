@@ -22,8 +22,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:menu="@menu/menu_app_bar"
-                app:navigationIcon="@drawable/ic_launcher_foreground"
-                app:title="@string/app_name" />
+                app:navigationIcon="@drawable/baseline_table_restaurant_24"
+                app:title="@string/detalle" />
 
         </com.google.android.material.appbar.AppBarLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
@@ -32,38 +32,60 @@
         android:id="@+id/rvPedidos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/marginSmall"
-        android:layout_marginEnd="@dimen/marginSmall"
-        android:layout_marginTop="@dimen/marginMedium"
-        android:layout_marginBottom="@dimen/marginMedium"
+        android:layout_marginHorizontal="@dimen/marginXS"
+        android:layout_marginTop="@dimen/marginXS"
+        android:layout_marginBottom="@dimen/marginXS"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/editFecha"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/numAsientos"
+        app:layout_constraintTop_toBottomOf="@+id/textSeats"
         app:spanCount="1" />
 
     <TextView
         android:id="@+id/textMesa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/marginLarge"
-        android:layout_marginTop="@dimen/marginMedium"
+        android:layout_marginStart="@dimen/marginMedium"
+        android:layout_marginTop="@dimen/marginSmall"
         android:text="@string/mesa"
-        android:textSize="20sp"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/coordinatorLayout" />
+
+    <TextView
+        android:id="@+id/numMesa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginSmall"
+        android:layout_marginStart="@dimen/marginXXS"
+        android:text="@string/text"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/textMesa"
+        app:layout_constraintTop_toBottomOf="@+id/coordinatorLayout" />
+
 
     <TextView
         android:id="@+id/textSeats"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/marginMedium"
-        android:layout_marginEnd="@dimen/marginLarge"
+        android:layout_marginTop="@dimen/marginSmall"
+        android:layout_marginEnd="@dimen/marginXXS"
         android:text="@string/asientos"
-        android:textSize="20sp"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/numAsientos"
+        app:layout_constraintTop_toBottomOf="@+id/coordinatorLayout" />
+
+    <TextView
+        android:id="@+id/numAsientos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginSmall"
+        android:layout_marginEnd="@dimen/marginMedium"
+        android:text="@string/text"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/coordinatorLayout" />
 
     <EditText
         android:id="@+id/editFecha"
@@ -98,33 +120,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/marginMedium"
-        android:layout_marginBottom="@dimen/marginSmall"
+        android:layout_marginBottom="@dimen/marginXS"
         android:text="@string/pedidos"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/rvPedidos"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/numMesa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/marginLarge"
-        android:layout_marginTop="@dimen/marginSmall"
-        android:text="@string/text"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textMesa" />
-
-    <TextView
-        android:id="@+id/numAsientos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/marginSmall"
-        android:layout_marginEnd="@dimen/marginLarge"
-        android:text="@string/text"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textSeats" />
 
     <Button
         android:id="@+id/addButton"

@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.retrofitMovil.domain.modelo.Pedido
+import com.example.retrofitMovil.ui.SwipeGesture
 import com.example.reyortiz_retrofitmovil.R
 import com.example.reyortiz_retrofitmovil.databinding.ItemBinding
 
@@ -16,45 +18,30 @@ class PedidosAdapter(
     val actions: PedidoActions
 ) : ListAdapter<Pedido, PedidosAdapter.PedidoViewHolder>(DiffCallback()) {
 
-    private var selectedPedidos = mutableSetOf<Pedido>()
-    private var selectMode: Boolean = false
 
     interface PedidoActions {
-        fun onDelete(pedido:Pedido)
-        fun onStartSelectMode(pedido: Pedido)
-        fun itemClicked(pedido: Pedido)
-    }
-
-    fun startSelectMode(){
-        selectMode = true
-        notifyDataSetChanged()
-    }
-    fun resetSelectMode(){
-        selectMode = false
-        notifyDataSetChanged()
+        fun onDelete(pedido: Pedido)
     }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PedidoViewHolder {
-        return PedidoViewHolder(LayoutInflater.from(parent.context)
-            .inflate(R.layout.item, parent, false))
+        return PedidoViewHolder(
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.item, parent, false)
+        )
     }
 
-    override fun onBindViewHolder(holder: PedidoViewHolder, position: Int) = with(holder){
+    override fun onBindViewHolder(holder: PedidoViewHolder, position: Int) = with(holder) {
         bind(getItem(position))
     }
 
 
-    inner class PedidoViewHolder(view: View) : RecyclerView.ViewHolder(view){
+    inner class PedidoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemBinding.bind(view)
-        fun bind(item : Pedido){
-//            itemView.setOnLongClickListener {
-//                if (selectMode){
-//
-//                } else {
-//
-//                }
-//            }
+        fun bind(pedido: Pedido) {
+            with(binding){
+                itemDescripcion.text = pedido.toString()
+            }
         }
     }
 
@@ -66,6 +53,18 @@ class PedidosAdapter(
 
         override fun areContentsTheSame(oldItem: Pedido, newItem: Pedido): Boolean {
             return oldItem == newItem
+        }
+    }
+
+    val swipeGesture = object : SwipeGesture(context) {
+        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+            when (direction) {
+                ItemTouchHelper.LEFT -> {
+
+                    actions.onDelete(currentList[viewHolder.bindingAdapterPosition])
+
+                }
+            }
         }
     }
 }

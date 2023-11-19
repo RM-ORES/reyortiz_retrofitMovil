@@ -6,7 +6,7 @@ import com.example.retrofitMovil.utilities.NetworkResult
 import javax.inject.Inject
 
 class GetMesaUsecase @Inject constructor(private val mesaRepository: MesaRepository){
-//    suspend operator fun invoke(): NetworkResult<List<Mesa>> {
-//        return mesaRepository.getMesa()
-//    }
+    suspend operator fun invoke(id : Int): NetworkResult<Mesa> {
+        return mesaRepository.getMesa(id)
+    }
 }

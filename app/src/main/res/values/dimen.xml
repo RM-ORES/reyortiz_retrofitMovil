@@ -5,4 +5,5 @@
     <dimen name="marginMedium">40dp</dimen>
     <dimen name="marginSmall">20dp</dimen>
     <dimen name="marginXS">10dp</dimen>
+    <dimen name="marginXXS">5dp</dimen>
 </resources>

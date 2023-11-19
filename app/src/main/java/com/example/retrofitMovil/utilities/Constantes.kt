@@ -9,6 +9,8 @@ object Constantes {
     const val PEDIDO_ID = "pedidos/{id}"
     const val ID = "id"
     const val PEDIDOS_POR_MESA = "pedidos/tableNumber/{tableNumber}"
+    const val NO_DATA = "No data"
+    const val DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss"
 
     //ui
     const val TABLE_NUMBER = "tableNumber"
@@ -17,5 +19,6 @@ object Constantes {
     const val COMA = ", "
     const val CLIENTE = "Cliente nº"
     const val SELECTED = " selected"
+    const val NO_PEDIDOS ="No hay pedidos asociados a esta mesa"
 
 }
