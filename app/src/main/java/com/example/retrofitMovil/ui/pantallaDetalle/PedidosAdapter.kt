@@ -60,9 +60,7 @@ class PedidosAdapter(
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
             when (direction) {
                 ItemTouchHelper.LEFT -> {
-
                     actions.onDelete(currentList[viewHolder.bindingAdapterPosition])
-
                 }
             }
         }

@@ -7,7 +7,5 @@ data class DetalleState (
     val mesa: Mesa? = null,
     val pedidos: List<Pedido> = emptyList(),
     val error: String? = null,
-    val selectedPedidos : List<Pedido> = emptyList(),
-    val selectMode : Boolean = false,
     val fin : Boolean = false
 )

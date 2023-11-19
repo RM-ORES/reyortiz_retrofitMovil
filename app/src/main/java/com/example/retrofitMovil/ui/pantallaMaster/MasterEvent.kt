@@ -1,7 +1,6 @@
 package com.example.retrofitMovil.ui.pantallaMaster
 
 import com.example.retrofitMovil.domain.modelo.Mesa
-import com.example.retrofitMovil.ui.pantallaDetalle.DetalleEvent
 
 sealed class MasterEvent {
     object GetMesas : MasterEvent()

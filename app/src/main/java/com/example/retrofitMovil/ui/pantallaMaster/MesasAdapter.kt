@@ -38,6 +38,9 @@ class MesasAdapter (
         selectedMesas.clear()
         notifyDataSetChanged()
     }
+    fun setSelected(selectedMesasList: Set<Mesa>){
+        selectedMesas.addAll(selectedMesasList)
+    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MesaViewHolder {
@@ -69,24 +72,31 @@ class MesasAdapter (
                     if(selectedMesas.contains(mesa)){
                         selectedMesas.remove(mesa)
                         actions.removeSelected(mesa)
+                        notifyDataSetChanged()
+                    } else {
+                        selectedMesas.add(mesa)
+                        actions.addSelected(mesa)
+                        notifyDataSetChanged()
                     }
                 }
             }
             itemView.setOnLongClickListener {
                 if (!selectMode){
-                    selectMode = true
+                    startSelectMode()
                     selectedMesas.add(mesa)
                     actions.onStartSelectMode(mesa)
+                    notifyDataSetChanged()
                 } else {
                     if(selectedMesas.contains(mesa)){
                         selectedMesas.remove(mesa)
                         actions.removeSelected(mesa)
+                        notifyDataSetChanged()
                     } else {
                         selectedMesas.add(mesa)
                         actions.addSelected(mesa)
+                        notifyDataSetChanged()
                     }
                 }
-                notifyItemChanged(bindingAdapterPosition)
                 true
             }
             if(selectedMesas.contains(mesa)){
@@ -109,6 +119,7 @@ class MesasAdapter (
             when(direction){
                 ItemTouchHelper.LEFT -> {
                     if(!selectMode){
+                        selectedMesas.remove(currentList[viewHolder.bindingAdapterPosition])
                         actions.onDelete(currentList[viewHolder.bindingAdapterPosition])
                     }
                 }

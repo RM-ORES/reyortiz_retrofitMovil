@@ -1,10 +1,8 @@
 package com.example.retrofitMovil.data.sources
 
 import com.example.retrofitMovil.data.model.toMesa
-import com.example.retrofitMovil.data.model.toPedido
 import com.example.retrofitMovil.data.sources.services.MesaService
 import com.example.retrofitMovil.domain.modelo.Mesa
-import com.example.retrofitMovil.domain.modelo.Pedido
 import com.example.retrofitMovil.utilities.Constantes
 import com.example.retrofitMovil.utilities.NetworkResult
 import javax.inject.Inject

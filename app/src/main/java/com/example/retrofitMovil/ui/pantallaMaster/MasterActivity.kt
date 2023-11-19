@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ActionMode
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.retrofitMovil.domain.modelo.Mesa
 import com.example.retrofitMovil.ui.pantallaDetalle.DetalleActivity
@@ -15,6 +16,7 @@ import com.example.retrofitMovil.utilities.Constantes
 import com.example.reyortiz_retrofitmovil.R
 import com.example.reyortiz_retrofitmovil.databinding.ActivityMasterBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -64,7 +66,6 @@ class MasterActivity : AppCompatActivity() {
         touchHelper.attachToRecyclerView(binding.rvMesas)
 
         observarViewModel()
-//        configAppBar()
     }
 
     private fun observarViewModel() {
@@ -73,38 +74,31 @@ class MasterActivity : AppCompatActivity() {
                 Toast.makeText(this@MasterActivity, error, Toast.LENGTH_SHORT).show()
                 viewModel.handleEvent(MasterEvent.ErrorVisto)
             }
-            if(state.mesas != anteriorState?.mesas && state.mesas.isNotEmpty()){
+            if(state.mesas != anteriorState?.mesas){
                 mesasAdapter.submitList(state.mesas)
             }
-            if (state.selectedMesas != anteriorState?.selectedMesas){
+            if(state.selectMode){
                 actionMode?.title = "${state.selectedMesas.size}" + Constantes.SELECTED
             }
             if (state.selectMode != anteriorState?.selectMode) {
                 if (state.selectMode) {
-                    mesasAdapter.startSelectMode()
+                    mesasAdapter.setSelected(state.selectedMesas)
                 } else {
                     mesasAdapter.resetSelectMode()
+                    actionMode?.finish()
                 }
             }
-
             anteriorState = state
+
+
+            val context = this
+            lifecycleScope.launch {
+                viewModel.sharedFlow.collect{ error->
+                    Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
-
-//    private fun configAppBar() {
-//        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
-//            when (menuItem.itemId) {
-//                R.id.delete -> {
-//                    viewModel.handleEvent(MasterEvent.DeleteSeleccionadas)
-//                    true
-//                }
-//
-//                else -> {
-//                    false
-//                }
-//            }
-//        }
-//    }
 
     private fun configContextBar()= object : ActionMode.Callback {
             override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {

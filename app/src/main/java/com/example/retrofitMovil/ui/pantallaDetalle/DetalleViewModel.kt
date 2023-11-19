@@ -62,7 +62,7 @@ class DetalleViewModel @Inject constructor(
                         is NetworkResult.Error -> {
                             _uiState.value = _uiState.value?.copy(
                                 mesa = mesa.data as Mesa,
-                                error = pedidos.message.toString()
+                                error = Constantes.NO_PEDIDOS
                             )
                         }
                     }
@@ -78,8 +78,13 @@ class DetalleViewModel @Inject constructor(
     private fun addPedido(pedido: Pedido) {
         viewModelScope.launch {
             when (addPedidoUsecase(pedido)) {
-                is NetworkResult.Error -> _uiState.value = _uiState.value?.copy(error = Constantes.ERROR)
-                is NetworkResult.Success -> _uiState.value = _uiState.value?.copy(error = Constantes.ANADIDO)
+                is NetworkResult.Error -> _uiState.value =
+                    _uiState.value?.copy(error = Constantes.ERROR)
+
+                is NetworkResult.Success -> {
+                    _uiState.value = _uiState.value?.copy(error = Constantes.ANADIDO)
+                    _uiState.value?.mesa?.let { setMesa(it.tableNumber) }
+                }
 
             }
         }
@@ -88,8 +93,13 @@ class DetalleViewModel @Inject constructor(
     private fun deletePedido(id: Int) {
         viewModelScope.launch {
             when (deletePedidoUsecase(id)) {
-                is NetworkResult.Error -> _uiState.value = _uiState.value?.copy(error = Constantes.ERROR)
-                is NetworkResult.Success -> _uiState.value = _uiState.value?.copy(error = Constantes.BORRADO_P)
+                is NetworkResult.Error -> _uiState.value =
+                    _uiState.value?.copy(error = Constantes.ERROR)
+
+                is NetworkResult.Success -> {
+                    _uiState.value = _uiState.value?.copy(error = Constantes.BORRADO_P)
+                    _uiState.value?.mesa?.let { setMesa(it.tableNumber) }
+                }
             }
         }
     }
@@ -98,8 +108,11 @@ class DetalleViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.value?.mesa?.let {
                 when (deleteMesaUsecase(it.tableNumber)) {
-                    is NetworkResult.Error -> _uiState.value = _uiState.value?.copy(error = Constantes.ERROR)
-                    is NetworkResult.Success ->_uiState.value = _uiState.value?.copy(error = Constantes.BORRADO_M, fin = true)
+                    is NetworkResult.Error -> _uiState.value =
+                        _uiState.value?.copy(error = Constantes.ERROR)
+
+                    is NetworkResult.Success -> _uiState.value =
+                        _uiState.value?.copy(error = Constantes.BORRADO_M, fin = true)
                 }
             }
 

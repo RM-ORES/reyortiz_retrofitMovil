@@ -1,13 +1,11 @@
 package com.example.retrofitMovil.data.sources
 
-import com.example.retrofitMovil.data.model.MesaResponse
-import com.example.retrofitMovil.data.model.PedidoResponse
+
 import com.example.retrofitMovil.data.model.toPedido
 import com.example.retrofitMovil.data.sources.services.PedidoService
 import com.example.retrofitMovil.domain.modelo.Pedido
 import com.example.retrofitMovil.utilities.Constantes
 import com.example.retrofitMovil.utilities.NetworkResult
-import retrofit2.Response
 import javax.inject.Inject
 
 class PedidoRemoteDataSource @Inject constructor(private val pedidoService: PedidoService) {

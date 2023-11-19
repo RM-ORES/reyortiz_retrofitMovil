@@ -12,7 +12,6 @@ import com.example.retrofitMovil.utilities.Constantes
 import com.example.reyortiz_retrofitmovil.R
 import com.example.reyortiz_retrofitmovil.databinding.ActivityDetalleBinding
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import java.time.LocalDateTime
 
 @AndroidEntryPoint
@@ -31,7 +30,7 @@ class DetalleActivity : AppCompatActivity() {
         pedidosAdapter = PedidosAdapter(this,
             object : PedidosAdapter.PedidoActions {
                 override fun onDelete(pedido: Pedido) {
-                    pedido.id?.let { DetalleEvent.DeletePedido(it) }
+                    pedido.id?.let { viewModel.handleEvent(DetalleEvent.DeletePedido(it)) }
                 }
             })
         binding.rvPedidos.adapter = pedidosAdapter
@@ -53,13 +52,11 @@ class DetalleActivity : AppCompatActivity() {
                 if (state.error == null) {
                     val mesa = viewModel.uiState.value?.mesa
                     mesa?.let {
-                        Timber.i(mesa.toString())
                         numMesa.text = it.tableNumber.toString()
                         numAsientos.text = it.seats.toString()
                     }
                     val pedidos = viewModel.uiState.value?.pedidos
                     pedidos?.let {
-                        Timber.i(pedidos.toString())
                         pedidosAdapter.submitList(pedidos)
                     } ?:{
                         textPedidos.text = Constantes.NO_PEDIDOS
@@ -67,7 +64,7 @@ class DetalleActivity : AppCompatActivity() {
                 }
                 if (state.fin){
                     val intent  = Intent(this@DetalleActivity, MasterActivity::class.java)
-                    startActivity(intent);
+                    startActivity(intent)
                 }
             }
         }
