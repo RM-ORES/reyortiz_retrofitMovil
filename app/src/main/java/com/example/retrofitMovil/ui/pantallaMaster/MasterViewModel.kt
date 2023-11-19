@@ -5,7 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.retrofitMovil.domain.modelo.Mesa
+import com.example.retrofitMovil.domain.usecases.mesa.DeleteMesaUsecase
 import com.example.retrofitMovil.domain.usecases.mesa.GetAllMesaUsecase
+import com.example.retrofitMovil.utilities.Constantes
 import com.example.retrofitMovil.utilities.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -14,7 +16,8 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class MasterViewModel @Inject constructor(private val getAllMesaUsecase: GetAllMesaUsecase) : ViewModel(){
+class MasterViewModel @Inject constructor(private val getAllMesaUsecase: GetAllMesaUsecase,
+    private val deleteMesaUsecase: DeleteMesaUsecase) : ViewModel(){
     private val _uiState = MutableLiveData<MasterState>()
     val uiState: LiveData<MasterState> get() = _uiState
     val selectedMesas = mutableListOf<Mesa>()
@@ -55,10 +58,18 @@ class MasterViewModel @Inject constructor(private val getAllMesaUsecase: GetAllM
     }
 
     private fun deleteMesa(id : Int){
-
+        viewModelScope.launch {
+            when(deleteMesaUsecase(id)){
+                is NetworkResult.Error -> _uiState.value = _uiState.value?.copy(error = Constantes.ERROR)
+                is NetworkResult.Success -> _uiState.value = _uiState.value?.copy(error = Constantes.BORRADO_P)
+            }
+        }
     }
     private fun deleteSelected(){
-
+        for(mesa : Mesa in selectedMesas){
+            deleteMesa(mesa.tableNumber)
+        }
+        resetSelectMode()
     }
     private fun selectMesa(mesa: Mesa){
         if (isSelected(mesa)){

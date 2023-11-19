@@ -20,5 +20,8 @@ object Constantes {
     const val CLIENTE = "Cliente nº"
     const val SELECTED = " selected"
     const val NO_PEDIDOS ="No hay pedidos asociados a esta mesa"
-
+    const val ANADIDO = "Pedido añadido"
+    const val BORRADO_M = "Mesa borrada"
+    const val BORRADO_P = "Pedido borrada"
+    const val ERROR = "No se ha podido realizar la acción"
 }

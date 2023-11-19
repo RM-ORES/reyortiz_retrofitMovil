@@ -6,10 +6,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.retrofitMovil.domain.modelo.Mesa
 import com.example.retrofitMovil.domain.modelo.Pedido
+import com.example.retrofitMovil.domain.usecases.mesa.DeleteMesaUsecase
 import com.example.retrofitMovil.domain.usecases.mesa.GetMesaUsecase
 import com.example.retrofitMovil.domain.usecases.pedido.AddPedidoUsecase
 import com.example.retrofitMovil.domain.usecases.pedido.DeletePedidoUsecase
 import com.example.retrofitMovil.domain.usecases.pedido.GetPedidosPorMesaUsecase
+import com.example.retrofitMovil.utilities.Constantes
 import com.example.retrofitMovil.utilities.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -22,7 +24,8 @@ class DetalleViewModel @Inject constructor(
     private val getMesaUsecase: GetMesaUsecase,
     private val getPedidosPorMesaUsecase: GetPedidosPorMesaUsecase,
     private val addPedidoUsecase: AddPedidoUsecase,
-    private val deletePedidoUsecase: DeletePedidoUsecase
+    private val deletePedidoUsecase: DeletePedidoUsecase,
+    private val deleteMesaUsecase: DeleteMesaUsecase
 ) : ViewModel() {
     private val _uiState = MutableLiveData<DetalleState>()
     val uiState: LiveData<DetalleState> get() = _uiState
@@ -73,12 +76,34 @@ class DetalleViewModel @Inject constructor(
     }
 
     private fun addPedido(pedido: Pedido) {
+        viewModelScope.launch {
+            when (addPedidoUsecase(pedido)) {
+                is NetworkResult.Error -> _uiState.value = _uiState.value?.copy(error = Constantes.ERROR)
+                is NetworkResult.Success -> _uiState.value = _uiState.value?.copy(error = Constantes.ANADIDO)
 
+            }
+        }
     }
 
     private fun deletePedido(id: Int) {
-
+        viewModelScope.launch {
+            when (deletePedidoUsecase(id)) {
+                is NetworkResult.Error -> _uiState.value = _uiState.value?.copy(error = Constantes.ERROR)
+                is NetworkResult.Success -> _uiState.value = _uiState.value?.copy(error = Constantes.BORRADO_P)
+            }
+        }
     }
-    private fun deleteMesa(){}
+
+    private fun deleteMesa() {
+        viewModelScope.launch {
+            _uiState.value?.mesa?.let {
+                when (deleteMesaUsecase(it.tableNumber)) {
+                    is NetworkResult.Error -> _uiState.value = _uiState.value?.copy(error = Constantes.ERROR)
+                    is NetworkResult.Success ->_uiState.value = _uiState.value?.copy(error = Constantes.BORRADO_M, fin = true)
+                }
+            }
+
+        }
+    }
 
 }

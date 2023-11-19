@@ -21,7 +21,7 @@
                 style="@style/Widget.MaterialComponents.Toolbar.Primary"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:menu="@menu/menu_app_bar"
+                app:menu="@menu/menu_context_bar"
                 app:navigationIcon="@drawable/baseline_table_restaurant_24"
                 app:title="@string/detalle" />
 
@@ -31,15 +31,15 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPedidos"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginHorizontal="@dimen/marginXS"
-        android:layout_marginTop="@dimen/marginXS"
         android:layout_marginBottom="@dimen/marginXS"
+        android:layout_marginTop="@dimen/marginMedium"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/editFecha"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textSeats"
+        app:layout_constraintTop_toBottomOf="@+id/addButton"
         app:spanCount="1" />
 
     <TextView
@@ -87,33 +87,36 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/coordinatorLayout" />
 
-    <EditText
-        android:id="@+id/editFecha"
+    <TextView
+        android:id="@+id/textAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/marginLarge"
-        android:layout_marginEnd="@dimen/marginLarge"
-        android:layout_marginBottom="@dimen/marginSmall"
-        android:ems="10"
-        android:inputType="date"
-        android:text="@string/fecha"
-        app:layout_constraintBottom_toTopOf="@+id/editCustomer"
+        android:layout_marginStart="@dimen/marginSmall"
+        android:layout_marginTop="@dimen/marginLarge"
+        android:layout_marginEnd="@dimen/marginSmall"
+        android:clickable="false"
+        android:ems="15"
+        android:focusable="false"
+        android:text="@string/introduce_el_n_mero_de_cliente"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/coordinatorLayout" />
 
     <EditText
         android:id="@+id/editCustomer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/marginLarge"
+        android:layout_marginTop="@dimen/marginSmall"
         android:layout_marginEnd="@dimen/marginLarge"
-        android:layout_marginBottom="@dimen/marginSmall"
         android:ems="10"
         android:inputType="number"
         android:text="@string/customer_id"
-        app:layout_constraintBottom_toTopOf="@+id/addButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textAdd" />
 
     <TextView
         android:id="@+id/textPedidos"
@@ -132,12 +135,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/marginXL"
+        android:layout_marginTop="@dimen/marginMedium"
         android:layout_marginEnd="@dimen/marginXL"
-        android:layout_marginBottom="@dimen/marginMedium"
         android:text="@string/a_adir"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editCustomer" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

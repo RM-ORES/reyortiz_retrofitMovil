@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorPrimary"
-    android:layout_margin="@dimen/marginXS">
+    android:layout_margin="@dimen/marginXXS">
 
     <TextView
         android:id="@+id/itemDescripcion"
@@ -14,7 +14,7 @@
         android:layout_marginVertical="@dimen/marginXXS"
         android:gravity="center"
         android:textColor="@color/skyBlue"
-        android:textSize="24sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="TextView" />

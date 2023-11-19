@@ -8,5 +8,6 @@ data class DetalleState (
     val pedidos: List<Pedido> = emptyList(),
     val error: String? = null,
     val selectedPedidos : List<Pedido> = emptyList(),
-    val selectMode : Boolean = false
+    val selectMode : Boolean = false,
+    val fin : Boolean = false
 )

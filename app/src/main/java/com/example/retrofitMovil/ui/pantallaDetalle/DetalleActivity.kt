@@ -1,11 +1,13 @@
 package com.example.retrofitMovil.ui.pantallaDetalle
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.retrofitMovil.domain.modelo.Pedido
+import com.example.retrofitMovil.ui.pantallaMaster.MasterActivity
 import com.example.retrofitMovil.utilities.Constantes
 import com.example.reyortiz_retrofitmovil.R
 import com.example.reyortiz_retrofitmovil.databinding.ActivityDetalleBinding
@@ -51,6 +53,7 @@ class DetalleActivity : AppCompatActivity() {
                 if (state.error == null) {
                     val mesa = viewModel.uiState.value?.mesa
                     mesa?.let {
+                        Timber.i(mesa.toString())
                         numMesa.text = it.tableNumber.toString()
                         numAsientos.text = it.seats.toString()
                     }
@@ -61,6 +64,10 @@ class DetalleActivity : AppCompatActivity() {
                     } ?:{
                         textPedidos.text = Constantes.NO_PEDIDOS
                     }
+                }
+                if (state.fin){
+                    val intent  = Intent(this@DetalleActivity, MasterActivity::class.java)
+                    startActivity(intent);
                 }
             }
         }
@@ -77,7 +84,7 @@ class DetalleActivity : AppCompatActivity() {
                                     null,
                                     it.tableNumber,
                                     Integer.parseInt(editCustomer.text.toString()),
-                                    LocalDateTime.parse(editFecha.text)
+                                    LocalDateTime.now()
                                 )
                             )
                     )

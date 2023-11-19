@@ -10,5 +10,6 @@
     <string name="text">text</string>
     <string name="pedidos">Pedidos:</string>
     <string name="a_adir">Añadir</string>
+    <string name="introduce_el_n_mero_de_cliente">Introduce el número de cliente para añadir un pedido</string>
 
 </resources>
